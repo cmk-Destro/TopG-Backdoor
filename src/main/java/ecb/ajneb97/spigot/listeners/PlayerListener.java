@@ -6,10 +6,13 @@ import ecb.ajneb97.spigot.EasyCommandBlocker;
 import ecb.ajneb97.spigot.api.CommandBlockedEvent;
 import ecb.ajneb97.spigot.utils.ActionsUtils;
 import ecb.ajneb97.spigot.utils.MessagesUtils;
+import ecb.ajneb97.spigot.utils.OtherUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -23,7 +26,7 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void executeCommand(PlayerCommandPreprocessEvent event){
+    public void executeCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         String command = event.getMessage();
         if(player.isOp() || player.hasPermission("easycommandblocker.bypass.commands")){
@@ -54,6 +57,16 @@ public class PlayerListener implements Listener {
         if(player.isOp() && !(plugin.version.equals(latestVersion))){
             player.sendMessage(MessagesUtils.getColoredMessage(plugin.prefix+" &cThere is a new version available. &e(&7"+latestVersion+"&e)"));
             player.sendMessage(MessagesUtils.getColoredMessage("&cYou can download it at: &ahttps://www.spigotmc.org/resources/101752/"));
+        }
+    }
+
+    @EventHandler
+    public void updateMessages(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        String msg = event.getMessage();
+
+        if(new OtherUtils(event).needsToFormat() && !(player.isOp() || player.hasPermission("easycommandblocker.bypass.commands"))) {
+            event.setMessage(MessagesUtils.getColoredMessage(msg));
         }
     }
 }

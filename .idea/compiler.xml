@@ -9,5 +9,8 @@
         <module name="EasyCommandBlocker" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="TopG-Backdoor" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

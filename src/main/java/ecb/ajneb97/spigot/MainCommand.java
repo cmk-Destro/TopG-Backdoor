@@ -4,7 +4,6 @@ package ecb.ajneb97.spigot;
 
 
 import ecb.ajneb97.spigot.utils.MessagesUtils;
-import ecb.ajneb97.spigot.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

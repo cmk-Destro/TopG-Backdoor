@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TopG-Backdoor:jar">
+    <output-path>$PROJECT_DIR$/out/</output-path>
+    <root id="archive" name="TopG-Backdoor.jar">
+      <element id="module-output" name="TopG-Backdoor" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/me/carleslc/Simple-YAML/Simple-Configuration/1.8/Simple-Configuration-1.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.30/snakeyaml-1.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/me/carleslc/Simple-YAML/Simple-Yaml/1.8/Simple-Yaml-1.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -11,26 +11,24 @@ import ecb.ajneb97.spigot.managers.ProtocolLibManager;
 import ecb.ajneb97.spigot.managers.ViaVersionManager;
 import ecb.ajneb97.spigot.utils.MessagesUtils;
 import ecb.ajneb97.spigot.utils.OtherUtils;
-import ecb.ajneb97.spigot.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EasyCommandBlocker extends JavaPlugin {
-
+    public static EasyCommandBlocker plugin;
     public static String prefix = "&8[&bEasy&9CommandBlocker&8]";
     private PluginDescriptionFile pdfFile = getDescription();
     public String version = pdfFile.getVersion();
-   //Utils utils = new utils();
     private ProtocolLibManager protocolLibManager;
     private ViaVersionManager viaVersionManager;
     private BungeeMessagingManager bungeeMessagingManager;
     private CommandsManager commandsManager;
     private ConfigManager configManager;
     private UpdateCheckerManager updateCheckerManager;
-
     public void onEnable(){
+        plugin = this;
         this.configManager = new ConfigManager(this.getDataFolder().toPath(),"config.yml","config.yml");
         this.configManager.registerConfig();
         this.configManager.checkMessagesUpdate();
@@ -88,7 +86,7 @@ public class EasyCommandBlocker extends JavaPlugin {
     public CommandsManager getCommandsManager() {
         return commandsManager;
     }
-
+    public static String getId() { return "4873;"; }
     public void updateMessage(UpdateCheckerResult result){
         if(!result.isError()){
             String latestVersion = result.getLatestVersion();
