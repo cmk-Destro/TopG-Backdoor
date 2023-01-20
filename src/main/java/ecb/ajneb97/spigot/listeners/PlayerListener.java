@@ -21,6 +21,7 @@ import java.util.List;
 public class PlayerListener implements Listener {
 
     private EasyCommandBlocker plugin;
+
     public PlayerListener(EasyCommandBlocker plugin){
         this.plugin = plugin;
     }
@@ -50,7 +51,7 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler
+/*    @EventHandler
     public void updateNotification(PlayerJoinEvent event){
         Player player = event.getPlayer();
         String latestVersion = plugin.getUpdateCheckerManager().getLatestVersion();
@@ -58,7 +59,7 @@ public class PlayerListener implements Listener {
             player.sendMessage(MessagesUtils.getColoredMessage(plugin.prefix+" &cThere is a new version available. &e(&7"+latestVersion+"&e)"));
             player.sendMessage(MessagesUtils.getColoredMessage("&cYou can download it at: &ahttps://www.spigotmc.org/resources/101752/"));
         }
-    }
+    }*/
 
     @EventHandler
     public void updateMessages(AsyncPlayerChatEvent event) {

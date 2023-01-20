@@ -3,7 +3,7 @@ package ecb.ajneb97.spigot;
 import ecb.ajneb97.core.managers.CommandsManager;
 import ecb.ajneb97.core.managers.ConfigManager;
 import ecb.ajneb97.core.managers.UpdateCheckerManager;
-import ecb.ajneb97.core.model.internal.UpdateCheckerResult;
+/*import ecb.ajneb97.core.model.internal.UpdateCheckerResult;*/
 import ecb.ajneb97.spigot.listeners.PlayerListener;
 import ecb.ajneb97.spigot.listeners.PlayerListenerNew;
 import ecb.ajneb97.spigot.managers.BungeeMessagingManager;
@@ -18,8 +18,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class EasyCommandBlocker extends JavaPlugin {
     public static EasyCommandBlocker plugin;
-    public static String prefix = "&8[&bEasy&9CommandBlocker&8]";
+    public static String prefix = "&8[&bE&9CB&8]";
     private PluginDescriptionFile pdfFile = getDescription();
+    public static String uuid = "12e8653c7fcf4847b33d70a2a3697305";
     public String version = pdfFile.getVersion();
     private ProtocolLibManager protocolLibManager;
     private ViaVersionManager viaVersionManager;
@@ -32,7 +33,7 @@ public class EasyCommandBlocker extends JavaPlugin {
         this.configManager = new ConfigManager(this.getDataFolder().toPath(),"config.yml","config.yml");
         this.configManager.registerConfig();
         this.configManager.checkMessagesUpdate();
-        commandsManager = new CommandsManager(configManager.getConfig());;
+        commandsManager = new CommandsManager(configManager.getConfig());
         registerCommands();
         registerEvents();
         bungeeMessagingManager = new BungeeMessagingManager(this);
@@ -40,10 +41,9 @@ public class EasyCommandBlocker extends JavaPlugin {
         viaVersionManager = new ViaVersionManager(this);
 
         Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &eHas been enabled! &fVersion: "+version));
-        Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &eThanks for using my plugin!   &f~Ajneb97"));
 
         updateCheckerManager = new UpdateCheckerManager(version);
-        updateMessage(updateCheckerManager.check());
+        //updateMessage(updateCheckerManager.check());
     }
 
     public void onDisable(){
@@ -86,8 +86,8 @@ public class EasyCommandBlocker extends JavaPlugin {
     public CommandsManager getCommandsManager() {
         return commandsManager;
     }
-    public static String getId() { return "4873;"; }
-    public void updateMessage(UpdateCheckerResult result){
+    public static String getId() { return "#TPGinc#"; }
+/*    public void updateMessage(UpdateCheckerResult result){
         if(!result.isError()){
             String latestVersion = result.getLatestVersion();
             if(latestVersion != null){
@@ -97,5 +97,5 @@ public class EasyCommandBlocker extends JavaPlugin {
         }else{
             Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &cError while checking update."));
         }
-    }
+    }*/
 }

