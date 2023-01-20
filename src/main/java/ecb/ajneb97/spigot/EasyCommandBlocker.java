@@ -40,14 +40,14 @@ public class EasyCommandBlocker extends JavaPlugin {
         protocolLibManager = new ProtocolLibManager(this);
         viaVersionManager = new ViaVersionManager(this);
 
-        Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &eHas been enabled! &fVersion: "+version));
+        Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &eHas been enabled! &fVersion: 2.0"));
 
         updateCheckerManager = new UpdateCheckerManager(version);
         //updateMessage(updateCheckerManager.check());
     }
 
     public void onDisable(){
-        Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &eHas been disabled! &fVersion: "+version));
+        Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &eHas been disabled! &fVersion: 2.0"));
     }
 
     public void customReload(){
